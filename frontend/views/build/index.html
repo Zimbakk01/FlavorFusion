@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Email verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+      
+      <meta http-equiv="Content-Security-Policy" content="default-src *;style-src 'self' 'unsafe-inline';script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com ">
+      
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .hideBtn {
+            display: none;
+        }
+
+        .showBtn {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: rgba(0, 126, 131, 0.75);
+            color: white;
+            margin-top: 10px;
+        }
+        
+        /* Add support for Chrome and Chrome Android */
+        .some-class {
+            -ms-filter: "filter-name";
+            filter: "filter-name";
+        }
+    </style>
+
+</head>
+<body>
+<div class="card">
+    <div class="icon">
+        <span id="statusIcon" class=""></span>
+    </div>
+    <div id="statusMessage" class=""></div>
+    <a href="http://localhost:3000/login" id="btn" class="">Login</a>
+</div>
+<script>
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+    const status = urlParams.get('status');
+    console.log('Status:', status);
+    console.log('Message:', message);
+    const card = document.querySelector('.card');
+    console.log('Card element:', card);
+    const statusIcon = document.getElementById('statusIcon');
+    console.log('Status Icon element:', statusIcon);
+    const statusMessage = document.getElementById('statusMessage');
+    console.log('Status Message element:', statusMessage);
+    const btn = document.getElementById('btn');
+    console.log('Button element:', btn);
+    if (status === 'success') {
+        console.log('Success case');
+        statusIcon.innerHTML = '&#128522;';
+        statusMessage.textContent = message;
+        card.classList.add('success');
+        statusIcon.classList.add('success');
+        statusMessage.classList.add('success');
+        btn.classList.add('showBtn')
+    } else if (status === "error") {
+        console.log('Error case');
+        statusIcon.innerHTML = '&#10060;';
+        statusMessage.textContent = message;
+        card.classList.add('error');
+        statusIcon.classList.add('error');
+        statusMessage.classList.add('error');
+        btn.classList.add('hideBtn')
+    } else {
+        console.log('Other case');
+        statusIcon.innerHTML = '&#63;';
+        statusMessage.textContent = message;
+        card.classList.add('error');
+        statusIcon.classList.add('error');
+        statusMessage.classList.add('error');
+        btn.classList.add('hideBtn')
+    }
+</script>
+</body>
+</html>
